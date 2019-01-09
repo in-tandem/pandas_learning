@@ -1,7 +1,7 @@
 
 import pandas as panda
 
-remote_location = 'https://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data'
+remote_location = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00350/default%20of%20credit%20card%20clients.xls'
 
 headers = ["symboling","normalized-losses","make","fuel-type","aspiration", "num","body-style",
          "drive-wheels","engine-location","wheel-base", "length","width","height","curb-weight","engine-type",
@@ -9,8 +9,11 @@ headers = ["symboling","normalized-losses","make","fuel-type","aspiration", "num
          "peak-rpm","city-mpg","highway-mpg","price"]
 
 
-data = panda.read_csv(remote_location, header = None)
+data = panda.read_excel(remote_location,sheet_name = "Data", header = 1)
 
+data.rename(str.lower, inplace = True, axis = 'columns')
+
+data.to_excel("C:\\somak\\taiwan_default.xls")
 data.columns = headers
 
 ##describe wihtout args gives you statistical summary of only numeric data type
