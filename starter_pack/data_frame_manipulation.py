@@ -229,7 +229,31 @@ def selection_using_query_expression():
     age_i_want =30
     print(a.query("sex == @sex_i_want & age <@age_i_want"))    
 
-selection_using_query_expression()
+
+def selection_using_isin():
+    
+    a = panda.DataFrame( data = \
+    
+        {
+            'id' : list(range(1,6)),
+            'sex': ['M','M','F','F','M'], #np.random.choice(['M','F'], 5),
+            'age' : np.random.randint(22,45,(5)),
+            'salary': [2344.12, 2000,33,44555,1000],
+            'name' : ['name1', 'name2', 'name3', 'name4', 'name5']
+
+        }
+    
+    )
+    
+    print(a)
+    names = ['name2','name5']
+    print(a[a.name.isin(names)])
+    print(a.query('name==@names'))
+
+    print(a.query('name!=@names'), '\n', a[~a.name.isin(names)])
+    
+selection_using_isin()
+# selection_using_query_expression()
 # selection_where_clause()
 # selection_based_on_iat_or_at()
 # selection_data_frame_label_based()
