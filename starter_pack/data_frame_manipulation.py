@@ -143,6 +143,74 @@ def selection_data_frame_label_based():
     selector = a.sex.str.startswith('M')
     print(a.loc[selector])
 
-selection_data_frame_label_based()
+def selection_based_on_iat_or_at():
+    '''
+
+    selections using [] or loc or iloc needs to handle a lot of cases
+    such as row evaluation, slice evaluation etc etc. if you need to have
+    exact scalar value, what might be faster is iat or at
+
+    '''
+
+    a = panda.DataFrame( data = \
+    
+        {
+            'id' : list(range(1,6)),
+            'sex': ['M','M','F','F','M'], #np.random.choice(['M','F'], 5),
+            'age' : np.random.randint(22,45,(5)),
+            'salary': [2344.12, 2000,33,44555,1000],
+            'name' : ['name1', 'name2', 'name3', 'name4', 'name5']
+
+        }
+    
+    )
+    
+    print(a)
+
+    print(a.iat[4,2]) ## returns the 3rd col of 5th row(since indices start from 0)
+
+    print(a.at[4,'sex']) ## returns sex value of the row with index 4
+    print(a.at[2,'salary'])
+    a.at[2,'salary'] = 1 ##value can be set..similar to loc
+    print(a)
+
+def selection_where_clause():
+    '''
+
+    a = id:[1,2,3,4,1,1,.4]
+
+    if we do a[a.id<=1] we get [1,1,1,.4] all rows which validates the condition.
+    the size of the returned dataframe/series may or may nt be same
+
+    where clause returns with the same size. the values which are not matched are 
+    returned as NaN
+
+    so a.where[a.id <=1] = [1,NaN,NaN,NaN,NaN,1,1,0.4]
+
+
+    '''
+
+    a = panda.DataFrame( data = \
+    
+        {
+            'id' : list(range(1,6)),
+            'sex': ['M','M','F','F','M'], #np.random.choice(['M','F'], 5),
+            'age' : np.random.randint(22,45,(5)),
+            'salary': [2344.12, 2000,33,44555,1000],
+            'name' : ['name1', 'name2', 'name3', 'name4', 'name5']
+
+        }
+    
+    )
+    
+    print(a)
+    print(a.where(a.sex=='M'), type(a.where(a.sex=='M')))
+
+    ##you can also replae NaN with smething else
+    print(a.where(a.sex=='M', 'blablaaablaaa'))
+
+selection_where_clause()
+# selection_based_on_iat_or_at()
+# selection_data_frame_label_based()
 # selection_data_frame_ilocation_based()
 # slice_data_frame()
