@@ -8,9 +8,10 @@ def create_panda_data_frame():
         1. panda series : container for scalar values. NOT SIZE MUTABLE
         2. panda data frame : container for series. COLUMNS CAN BE ADDED,MUTABLE
     
+
         panda dataframe: General 2D labeled, size-mutable tabular \
                          structure with potentially heterogeneously-typed column
-
+                         pandas.core.frame.DataFrame
         how to create a pandas data series??
         pandas.DataFrame(data=None, index=None, dtype=None, columns=None, copy=False)
 
@@ -90,6 +91,7 @@ def create_panda_data_series():
                       Since its stored as a ndarray , it has methods like dtype/shape attributes. 
                       Also it can be passed to most numpy functions that expects ndarray as well
                       Meaning vectorixation is possible 
+                      pandas.core.series.Series
 
         panda dataframe: General 2D labeled, size-mutable tabular \
                          structure with potentially heterogeneously-typed column
